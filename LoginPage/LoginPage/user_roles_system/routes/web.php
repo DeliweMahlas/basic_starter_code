@@ -20,5 +20,17 @@ Route::get('/agent/update', [AgentController::class, 'edit'])->name('agent.edit'
 // Route to handle the form submission and update the agent details
 Route::post('/agent/update', [AgentController::class, 'update'])->name('agent.update');
 //logout
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::post('/admin/agents/{id}/approve', [AdminController::class, 'approveAgent'])->name('admin.agents.approve');
+Route::post('/admin/agents/{id}/disapprove', [AdminController::class, 'disapproveAgent'])->name('admin.agents.disapprove');
+use App\Http\Controllers\RatingController;
+
+Route::post('/rate-agent', [RatingController::class, 'store'])->name('rate.agent');
+Route::post('/agents/{id}/rate', [AgentController::class, 'rate'])->name('agents.rate');
+Route::get('/agent/{id}/ratings', [RatingController::class, 'showRatings'])->name('agent.ratings');
+// Route for submitting a rating
+//Route::post('/agents/{id}/rate', [AgentController::class, 'rateAgent'])->name('agent.rate');
 
 Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');

@@ -42,6 +42,11 @@
         <!-- Submit Button -->
         <button type="submit" class="btn btn-success">Update</button>
     </form>
+
+    <!-- Rating Button -->
+    <div class="form-group mt-4">
+        <a href="{{ route('ratings.create', ['agent_id' => $agent->id]) }}" class="btn btn-primary">Rate This Agent</a>
+    </div>
 </div>
 @endsection
 
@@ -66,5 +71,16 @@ form {
 
 button {
     width: 100%;
+}
+
+/* Styling for the rating button */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    width: 100%;
+}
+
+.mt-4 {
+    margin-top: 20px;
 }
 </style>

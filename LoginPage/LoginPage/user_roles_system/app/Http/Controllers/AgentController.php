@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Rating;
 
 class AgentController extends Controller
 {
@@ -43,5 +45,34 @@ class AgentController extends Controller
          // Redirect back to the agent dashboard with a success message
          return redirect()->route('dashboard.agent')->with('success', 'Your details have been updated.');
      }
+     public function rate(Request $request, $id)
+{
+    $request->validate([
+        'rating' => 'required|integer|min:1|max:5',
+        'review' => 'nullable|string|max:1000',
+    ]);
+
+    $agent = User::findOrFail($id); // Find the agent
+
+    // Create a new rating for the agent (assuming you have a Rating model)
+    Rating::create([
+        'user_id' => Auth::id(),
+        'agent_id' => $agent->id,
+        'rating' => $request->input('rating'),
+        'review' => $request->input('review'),
+    ]);
+
+    return redirect()->back()->with('success', 'Your rating has been submitted.');
+}
+
+public function getAgents()
+{
+    // Retrieve all users where the role is 'agent'
+    $agents = User::where('role', 'agent')->get();
+
+    // Pass the agents to the view
+    return view('dashboard.user', ['agents' => $agents, 'user' => Auth::user()]);
+}
+
 }
 

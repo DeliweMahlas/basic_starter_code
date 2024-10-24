@@ -1,6 +1,7 @@
 @extends('layouts')
 @section('title','Registration')
 @section('content')
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 
 <div class="container mt-5">
     <div class="alerts">
@@ -34,25 +35,31 @@
                 <label class="form-label">Last Name</label>
                 <input type="text" class="form-control" name="surname" required>
             </div>
+            
             <div class="mb-3">
                 <label class="form-label">Physical Address</label>
                 <input type="text" class="form-control" name="address">
             </div>
+            
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
                 <input type="email" class="form-control" name="email" required>
             </div>
+            
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
+            
             <div class="mb-3">
                 <label class="form-label">Role</label>
                 <select name="role" class="form-select" required>
                     <option value="agent">Agent</option>
                     <option value="user">User</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
+            
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
         </form>
     </div>
@@ -61,7 +68,6 @@
 @endsection
 
 <style>
-    
     body {
         font-family: 'Helvetica Neue', Arial, sans-serif;
         background-color: #f5f5f5;
@@ -75,8 +81,8 @@
 
     .container {
         width: 100%;
-        max-width: 1000px;
-        padding: 100px;
+        max-width: 800px;
+        padding: 20px;
         margin: 0 auto;
     }
 
@@ -134,8 +140,7 @@
     
     @media (max-width: 768px) {
         .form-container {
-            width: 100%;
+            padding: 20px;
         }
     }
-
 </style>
